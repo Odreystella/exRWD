@@ -7,8 +7,7 @@
   background: #233d84;
   color: #ffffff;
 }
-
-body * {
+body *{
   -webkit-tap-highlight-color: rgba(255, 255, 200, 0.3);
   tap-highlight-color: rgba(255, 255, 200, 0.3);
 }
@@ -17,11 +16,6 @@ body { /*여러페이지가 있을 때가 있어서 container로 덧씌우는게
   margin: 0 auto;
   max-width: 840px; /*아무리 커도 840px를 넘을 수 없음*/
   min-height: 100vh;
-}
-
-nav a {
-  color: inherit;
-  text-decoration: none;
 }
 
 a img {
@@ -33,12 +27,26 @@ a img {
   height: auto;
 }
 /* .respons-svg{
-
+  max-width: 100%;
+  height: auto;
 } */
+.button {
+  cursor: pointer;
+  border: none;
+}
+
+.a11y-hidden {
+  overflow: hidden;
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
 
 /* 헤더 디자인 */
 .app-header{
-  background-color: yellow;
   position: fixed;
   left: 0;  /*width 안주고 뷰포트 기준에 맞게 배치하는 트릭*/
   right: 0;
@@ -46,17 +54,91 @@ a img {
   border-bottom: 1px solid #e0e0e0;
   display: flex;
   justify-content: space-between;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* 로고 */
 .brand{
-  background-color: pink;
   margin: 0;
-  width: 25.595238095238093%; /*뷰포트에 맞게 너비가 반응*/
 }
 
 .brand a {
   display: block;
-  padding: 25px;
+  padding: 10px 15px;
+  width: 225px;
+}
+/* 메인 메뉴 열기 버튼 */
+.is-open-menu {
+  user-select: none;
+  padding: 20px;
+  background: #ffffff;
+  /* transition: all 0.3s ease; */
 }
 
+.is-open-menu .ir {
+  display: block;
+  cursor: pointer;
+  width: 26px;
+  height: 22px;
+  background: url(../images/navigation-button.gif) no-repeat 50%;
+}
+
+/* 메인 메뉴 */
+.app-navigation {
+  display: flex;
+  flex-flow: row wrap; /*줄바꿈 허용*/
+  justify-content: flex-end;
+  align-items: flex-start;
+  align-content: flex-start; /*여러줄 정렬*/
+  overflow: hidden; /*뷰포트 넘어가면 내용물 안보이게*/
+  z-index: 1000;/*항상 메인메뉴보다 위에 오게*/
+  position: fixed;  /*화면에 뷰포트만큼 키우는거*/
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color:yellow;
+  /* padding-top: 60px; */
+  background: hsla(225, 57%, 10%, 0.9);
+  color: #fff;
+  transition: all 0.4s cubic-bezier(0.66, -0.01, 0.3, 0.99);
+  transform: translateX(105vw); /*X축 바깥으로 밀어놓고 클릭이벤트 발생하면 들어오게*/
+  backdrop-filter: blur(2px);  /*뒤에 보이는 배경이 잘 안보이게 레이어에 주는 효과*/
+}
+
+.app-navigation.is-active {
+  transform: translateX(0);
+}
+
+.app-navigation ul{
+  width: 100%;
+  list-style: none;
+  margin: 0;
+}
+.app-navigation li {
+  border-bottom: 1px solid hsla(225, 57%, 30%, 0.5);
+}
+
+.app-navigation a {
+  display: block;
+  padding: 1em;
+  transition: all 0.4s ease;
+  color: inherit;
+  text-decoration: none;
+}
+
+.app-navigation a:hover,
+.app-navigation a:focus {
+  background: #2e437c;
+}
+
+.is-close-menu {
+  order: -1;
+  padding: 20px;
+  background: transparent;
+  color: #fff;
+  font-weight: 100;
+  font-size: 40px;
+  line-height: 0.5;
+  transition: all 0.4s ease;
+}
